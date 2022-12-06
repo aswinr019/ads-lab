@@ -102,6 +102,7 @@ void deleteBeg(void){
 	if(preptr == NULL)
 		printf("List is empty\n\n");
 	else if(preptr->next == NULL){
+		printf("The deleted number is %d\n\n",preptr->data);
 		free(preptr);
 		head = NULL;
 	}
@@ -109,6 +110,7 @@ void deleteBeg(void){
 		ptr = preptr->next;
 		ptr->prev = NULL;
 		head = ptr;
+		printf("The deleted number is %d\n\n",preptr->data);
 		free(preptr);
 	}
 
@@ -121,6 +123,7 @@ void deleteLast(void){
 	if(ptr == NULL)
 		printf("List is empty\n\n");
 	else if(ptr->next == NULL){
+		printf("The deleted number is %d\n\n",ptr->data);
 		free(ptr);
 		head = NULL;
 	}
@@ -130,6 +133,7 @@ void deleteLast(void){
 			ptr = ptr->next;
 		}
 		preptr->next = NULL;
+		printf("The deleted number is %d\n\n",ptr->data);
 		free(ptr);
 	}
 }
@@ -154,8 +158,9 @@ void deleteInBet(void){
 			printf("%d is  not present in the list\n\n");
 		else {
 			if(ptr->next == NULL){
+				printf("The deleted number is %d\n\n",ptr->data);
 				free(ptr);
-				head = ptr;
+				head = NULL;
 			}
 			else{
 			while(ptr->data != pos ){
@@ -165,6 +170,7 @@ void deleteInBet(void){
 			postptr = ptr->next;
 			preptr->next = postptr;
 			postptr->prev = preptr;
+			printf("The deleted number is %d\n\n",ptr->data);
 			free(ptr);
 			}
 		}
@@ -183,7 +189,7 @@ void search(void){
 	else {
 		while(ptr != NULL){
 			if(ptr->data == s){
-				printf("Number found at position %d\n\n",pos);
+				printf("Number found at position %d\n",pos);
 				found = 0;
 			}
 			ptr = ptr->next;
@@ -192,6 +198,7 @@ void search(void){
 
 		if(found < 0 )
 			printf("Number not present in list\n\n");
+		printf("\n\n");
 	}
 
 }

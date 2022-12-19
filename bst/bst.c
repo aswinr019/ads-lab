@@ -2,33 +2,63 @@
 #include<stdlib.h>
 
 struct node{
-	int data;
+	int key;
 	struct node *left;
 	struct node *right;
 };
 
-struct node *root = NULL;
 
-struct node* insert(struct node *startNode , int data){
+struct node* insert(struct node *startNode , int key){
 	struct node *temp;
 	if(startNode == NULL){
-		temp = (struct node*)malloc(sizeof(struct node));
-		temp->data = data;
-		temp->left = NULL;
-		temp->right = NULL;
+		startNode = (struct node*)malloc(sizeof(struct node));
+		startNode->key = key;
+		startNode->left = NULL;
+		startNode->right = NULL;
+		
 	}
-	else if (data < startNode->data)
-		startNode->left = insert(startNode->left,data);
+	else if (key < startNode->key)
+		startNode->left = insert(startNode->left,key);
 	else 
-		startNode->right = insert(startNode->right,data);
+		startNode->right = insert(startNode->right,key);
 
-	return  temp;
+	return  startNode;
+}
+
+int getRootData(struct node* root){
+	if(root == NULL)
+		return -1;
+	else 
+		return (root->key);
+}
+
+int getMinKey(struct node* root){
+
+	if(root == NULL )
+		return -1;
+	else {
+		while(root != NULL && root->left != NULL)
+			root = root->left;
+		return root->key;
+	}
+}
+
+int getMaxKey(struct node* root){
+
+	if(root == NULL ) 
+		return -1;
+	else {
+		while ( root != NULL && root->right != NULL)
+			root = root->right;
+		return root->key;
+	}
+
 }
 
 void preOrder(struct node *root){
 	if(root == NULL)
 		return;
-	printf("%d\t",root->data);
+	printf("%d\t",root->key);
 	preOrder(root->left);
 	preOrder(root->right);
 }
@@ -37,7 +67,7 @@ void inOrder(struct node *root){
 	if(root == NULL)
 		return;
 	inOrder(root->left);
-	printf("%d\t",root->data);
+	printf("%d\t",root->key);
 	inOrder(root->right);
 }
 
@@ -46,13 +76,42 @@ void postOrder(struct node *root){
 		return;
 	postOrder(root->left);
 	postOrder(root->right);
-	printf("%d\t",root->data);
+	printf("%d\t",root->key);
 }
+struct node* deleteKey(struct node* root,int delete){
+
+	if(root == NULL)
+		return root;
+	else if(delete < root->key)
+		root->left = deleteKey(root->left,delete);
+	else if(delete > root->key)
+		root->right = deleteKey(root->right,delete);
+	else {
+
+	}
+}
+
+struct node* searchKey(struct node* root,int search){
+
+	if(root == NULL)
+		return root;
+	else if( root->key == search )
+		return root;
+	else if(root->key < search)
+		searchKey(root->right,search);
+	else 
+		searchKey(root->left,search);
+
+}
+
+
 void main(){
 
-	int choice,data;
+	int choice,key,rootData,minKey,maxKey,search,delete;
+	struct node *root = NULL,*searchResult ;
+
 	do{
-		printf("Enter a choice :\n0.Exit\n1.Insert a node\n2.Pre-order\n3.In-order\n4.Post-order\n\n-> ");
+		printf("Enter a choice :\n0.Exit\n1.Insert a node\n2.Pre-order\n3.In-order\n4.Post-order\n5.Root\n6.Min key\n7.Max key\n8.Delete key\n9.Search Key\n\n-> ");
 		scanf("%d",&choice);
 		switch(choice){
 			case 0 : {
@@ -61,30 +120,74 @@ void main(){
 				 }
 			case 1 : {
 					 printf("Enter a number to insert : ");
-					 scanf("%d",&data);
-	      				 root = insert(root,data);
+					 scanf("%d",&key);
+	      				 root = insert(root,key);
 					 break;
 				 }
 			case 2 : {
-					 printf("Pre-order : ");
+					 printf("Pre-order :\t");
 					 preOrder(root);
-					 printf("\n");
+					 printf("\n\n");
 					 break;
 				 }
 			case 3 : {
-					 printf("In-order : ");
+					 printf("In-order :\t");
 					 inOrder(root);
-					 printf("\n");
+					 printf("\n\n");
 					 break;
 				 }
 			case 4 : {
-					 printf("Post-order : ");
+					 printf("Post-order :\t");
 					 postOrder(root);
-					 printf("\n");
+					 printf("\n\n");
 					 break;
 				 }
+			case 5 : {
+					 rootData = getRootData(root);
+					 if(rootData > 0)
+					 	printf("The root  is %d\n\n",rootData);
+					 else 
+						 printf("The bst is empty\n\n");
+					 break;
+				 }
+			case 6: {
+					minKey = getMinKey(root);
+					if(minKey > 0 )
+						printf("The min key is : %d\n\n",minKey);
+					else 
+						printf("The bst is empty\n\n");
+					break;
+
+				}
+			case 7 : {
+					 maxKey = getMaxKey(root);
+					 if(maxKey > 0 )
+						 printf("The max key is : %d\n\n",maxKey);
+					 else 
+						 printf("The bst is empty\n\n");
+					 break;
+				 }
+			case 8 : {
+					 printf("Enter a key to delete : ");
+					 scanf("%d",&delete);
+
+	      				 break;
+				 }
+			case 9 : {
+					 printf("Enter a key to search : ");
+					 scanf("%d",&search);
+
+					 searchResult = searchKey(root,search);
+
+					 if(searchResult == NULL)
+						 printf("Element not present in bst!\n\n");
+					 else 
+						 printf("key found at address %p\n\n",searchResult);
+					 break;
+				 }
+	
 			default : {
-					  printf("Wrong input\n");
+					  printf("Wrong input!\n\n");
 					  break;
 				  }
 		}

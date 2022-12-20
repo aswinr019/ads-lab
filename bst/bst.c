@@ -91,17 +91,35 @@ struct node* deleteKey(struct node* root,int delete){
 	}
 }
 
-struct node* searchKey(struct node* root,int search){
+struct node* deleteKey(struct node* root,int delete){
 
 	if(root == NULL)
 		return root;
-	else if( root->key == search )
-		return root;
-	else if(root->key < search)
-		searchKey(root->right,search);
-	else 
-		searchKey(root->left,search);
+	else if(delete < root->key)
+		root->left = deleteKey(root->left,delete);
+	else if(delete > root->key)
+		root->right = deleteKey(root->right,delete);
+	else {
+		if(root->left == NULL && root->right == NULL)
+			return NULL;
+		else if(root->right == NULL){
 
+			struct node *temp = root->left;
+			free(root);
+			return temp;
+		}
+		else if(root->left == NULL){
+			struct node *temp = root->right;
+			free(root);
+			return temp;
+		}
+		struct node* temp = root->right;
+		while(temp != NULL && temp->left != NULL)
+			temp = temp->left;
+		root->key = temp->key;
+		root->right = deleteNode(root->right,temp->key);
+	}
+	return root;
 }
 
 

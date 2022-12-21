@@ -87,19 +87,6 @@ struct node* deleteKey(struct node* root,int delete){
 	else if(delete > root->key)
 		root->right = deleteKey(root->right,delete);
 	else {
-
-	}
-}
-
-struct node* deleteKey(struct node* root,int delete){
-
-	if(root == NULL)
-		return root;
-	else if(delete < root->key)
-		root->left = deleteKey(root->left,delete);
-	else if(delete > root->key)
-		root->right = deleteKey(root->right,delete);
-	else {
 		if(root->left == NULL && root->right == NULL)
 			return NULL;
 		else if(root->right == NULL){
@@ -117,10 +104,25 @@ struct node* deleteKey(struct node* root,int delete){
 		while(temp != NULL && temp->left != NULL)
 			temp = temp->left;
 		root->key = temp->key;
-		root->right = deleteNode(root->right,temp->key);
+		root->right = deleteKey(root->right,temp->key);
 	}
 	return root;
 }
+
+struct node* searchKey(struct node* root, int search){
+
+	if(root == NULL)
+		return root;
+	else if(root->key == search)
+		return root;
+	else if(search < root->key)
+		searchKey(root->left,search);
+	else
+		searchKey(root->right,search);
+
+}
+
+
 
 
 void main(){
@@ -188,7 +190,7 @@ void main(){
 			case 8 : {
 					 printf("Enter a key to delete : ");
 					 scanf("%d",&delete);
-
+					 root =  deleteKey(root,delete);
 	      				 break;
 				 }
 			case 9 : {

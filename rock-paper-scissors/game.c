@@ -1,14 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+char options[3][9] = { "Rock", "Paper", "Scissors" };
 
 int generateComputerChoice(void){
 
 
 	int random;
-	time_t t1;
-	srand( (unsigned) (time) (&t1));
-	random = (rand() % 4 );
+	//seeding 
+	srand( time(NULL) );
+	random = (rand() % 3 )+1;
 	return random ;
 }
 
@@ -17,20 +18,31 @@ void  printChoices(int uChoice , int cChoice){
 
 	if ( uChoice == 0 )
 		return;
-	printf("Your choice : ");
-	 if ( uChoice == 1 )
-		 printf("Rock\n");
-	 else if ( uChoice == 2 )
-		 printf("Paper\n");
-	 else if ( uChoice == 3 )
-		 printf("Scissors\n");
-	 printf("Computer choice : ");
-	  if( cChoice == 1 )
-		  printf("Rock\n");
-	  else if ( cChoice == 2 )
-		  printf("Paper\n");
-	  else if ( cChoice == 3 )
-		  printf("Scissors\n");
+
+	// printf("Your choice : ");
+	//  if ( uChoice == 1 )
+	// 	 printf("Rock\n");
+	//  else if ( uChoice == 2 )
+	// 	 printf("Paper\n");
+	//  else if ( uChoice == 3 )
+	// 	 printf("Scissors\n");
+	//  printf("Computer choice : ");
+	//   if( cChoice == 1 )
+	// 	  printf("Rock\n");
+	//   else if ( cChoice == 2 )
+	// 	  printf("Paper\n");
+	//   else if ( cChoice == 3 )
+	// 	  printf("Scissors\n");
+
+	// printf("Your choice  ");
+	// printf("%s\n",options[uChoice - 1]);
+	// printf("Computer choice  ");
+	// printf("%s\n",options[cChoice - 1]);
+
+	printf("Your choice\t\tComputer choice\n");
+	printf("-----------\t\t----------------\n");
+	printf("%s\t\t\t%s\n\n",options[uChoice - 1],options[cChoice - 1]);
+
 
 }
 

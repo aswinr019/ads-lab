@@ -51,33 +51,31 @@ void compareChoices(int uChoice , int cChoice){
 	if ( uChoice == 0 )
 		return;
 
-	//user choice rock vs computer
-	else if( uChoice == 1 && cChoice == 1 )
-		printf("That's a draw\n\n");
-	else if ( uChoice == 1 && cChoice == 2)
-		printf("You loose!\n\n");
-	else if ( uChoice == 1 && cChoice == 3 )
-		printf("You won!\n\n");
+	  //draw
+        else if ( uChoice == cChoice )
+                printf("That's a draw\n\n");
 
-	//user choice paper vs computer
-	else if ( uChoice == 2 && cChoice == 1 )
-		printf("You won!\n\n");
-	else if ( uChoice == 2 && cChoice == 2 )
-		printf("That's a draw\n\n");
-	else if ( uChoice ==2 && cChoice == 3 )
-		printf("You loose\n\n");
+        //user choice rock vs computer
+        else if ( uChoice == 1 && cChoice == 2)
+                printf("You loose!\n\n");
+        else if ( uChoice == 1 && cChoice == 3 )
+                printf("You won!!\n\n");
 
-	//user choice scissors vs computer
-	else if ( uChoice == 3 && cChoice == 1 )
-		printf("You loose\n\n");
-	else if ( uChoice == 3 && cChoice == 2 )
-		printf("You won\n\n");
-	else if( uChoice == 3 && cChoice == 3 )
-		printf("That's a draw\n\n");
-	else {
-		printf("%d%d\n",uChoice,cChoice);
-		printf("Input error!!!!\n\n");
-	}
+        //user choice paper vs computer
+        else if ( uChoice == 2 && cChoice == 1 )
+                printf("You won!!\n\n");
+        else if ( uChoice ==2 && cChoice == 3 )
+                printf("You loose\n\n");
+
+        //user choice scissors vs computer
+        else if ( uChoice == 3 && cChoice == 1 )
+                printf("You loose\n\n");
+        else if ( uChoice == 3 && cChoice == 2 )
+                printf("You won!!\n\n");
+        else {
+                printf("%d%d\n",uChoice,cChoice);
+                printf("Input error!!!!\n\n");
+        }
 
 }
 int main(){

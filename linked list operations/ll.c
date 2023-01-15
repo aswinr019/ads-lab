@@ -106,7 +106,7 @@ void deleteInBet(){
 		}
 
 		if(found < 0 )
-			printf("%d is not present in the list\n");
+			printf("%d is not present in the list\n",pos);
 		else {
 
 		while(ptr->data != pos){

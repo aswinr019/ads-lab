@@ -9,7 +9,7 @@ struct node{
 
 
 struct node* insert(struct node *startNode , int key){
-	struct node *temp;
+
 	if(startNode == NULL){
 		startNode = (struct node*)malloc(sizeof(struct node));
 		startNode->key = key;

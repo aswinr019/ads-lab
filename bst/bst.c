@@ -81,7 +81,7 @@ void postOrder(struct node *root){
 struct node* deleteKey(struct node* root,int delete){
 
 	if(root == NULL)
-		return root;
+		return NULL;
 	else if(delete < root->key)
 		root->left = deleteKey(root->left,delete);
 	else if(delete > root->key)

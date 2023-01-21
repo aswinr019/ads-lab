@@ -135,7 +135,7 @@ void main(){
 		scanf("%d",&choice);
 		switch(choice){
 			case 0 : {
-					 printf("Exititng!\n\n");
+					 printf("Exititng!!\n\n");
 					 exit(0);
 				 }
 			case 1 : {

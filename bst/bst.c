@@ -109,12 +109,12 @@ struct node* deleteKey(struct node* root,int delete){
 	return root;
 }
 
-struct node* searchKey(struct node* root, int search){
+int searchKey(struct node* root, int search){
 
 	if(root == NULL)
-		return root;
+		return -1;
 	else if(root->key == search)
-		return root;
+		return 1;
 	else if(search < root->key)
 		searchKey(root->left,search);
 	else
@@ -199,10 +199,10 @@ void main(){
 
 					 searchResult = searchKey(root,search);
 
-					 if(searchResult == NULL)
+					 if(searchResult == -1)
 						 printf("Element not present in bst!\n\n");
 					 else 
-						 printf("key found at address %p\n\n",searchResult);
+						 printf("key found !!");
 					 break;
 				 }
 	

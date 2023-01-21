@@ -155,7 +155,7 @@ void deleteInBet(void){
 		}
 
 		if(found < 0)
-			printf("%d is  not present in the list\n\n");
+			printf("%d is  not present in the list\n\n",pos);
 		else {
 			if(ptr->next == NULL){
 				printf("The deleted number is %d\n\n",ptr->data);

@@ -9,7 +9,7 @@ struct node{
 
 
 struct node* insert(struct node *startNode , int key){
-	struct node *temp;
+
 	if(startNode == NULL){
 		startNode = (struct node*)malloc(sizeof(struct node));
 		startNode->key = key;
@@ -81,7 +81,7 @@ void postOrder(struct node *root){
 struct node* deleteKey(struct node* root,int delete){
 
 	if(root == NULL)
-		return root;
+		return NULL;
 	else if(delete < root->key)
 		root->left = deleteKey(root->left,delete);
 	else if(delete > root->key)

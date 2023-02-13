@@ -33,7 +33,7 @@ void DFS(int graph[MAX][MAX], int start, int vertexCount) {
 int main() {
 
     int choice,i,j,start,vertexCount = 0;
-   
+    int graph[MAX][MAX];   
 
                 printf("Enter the number of vertex in the graph: ");
                 scanf("%d",&vertexCount);

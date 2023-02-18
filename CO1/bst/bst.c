@@ -7,15 +7,13 @@ struct node{
 	struct node *right;
 };
 
-
 struct node* insert(struct node *startNode , int key){
 
 	if(startNode == NULL){
 		startNode = (struct node*)malloc(sizeof(struct node));
 		startNode->key = key;
 		startNode->left = NULL;
-		startNode->right = NULL;
-		
+		startNode->right = NULL;		
 	}
 	else if (key < startNode->key)
 		startNode->left = insert(startNode->left,key);
@@ -52,7 +50,6 @@ int getMaxKey(struct node* root){
 			root = root->right;
 		return root->key;
 	}
-
 }
 
 void preOrder(struct node *root){
@@ -78,6 +75,7 @@ void postOrder(struct node *root){
 	postOrder(root->right);
 	printf("%d\t",root->key);
 }
+
 struct node* deleteKey(struct node* root,int delete){
 
 	if(root == NULL)
@@ -90,7 +88,6 @@ struct node* deleteKey(struct node* root,int delete){
 		if(root->left == NULL && root->right == NULL)
 			return NULL;
 		else if(root->right == NULL){
-
 			struct node *temp = root->left;
 			free(root);
 			return temp;
@@ -100,7 +97,7 @@ struct node* deleteKey(struct node* root,int delete){
 			free(root);
 			return temp;
 		}
-		struct node* temp = root->right;
+		struct node *temp = root->right;
 		while(temp != NULL && temp->left != NULL)
 			temp = temp->left;
 		root->key = temp->key;
@@ -119,11 +116,7 @@ int searchKey(struct node* root, int search){
 		searchKey(root->left,search);
 	else
 		searchKey(root->right,search);
-
 }
-
-
-
 
 void main(){
 
@@ -200,7 +193,7 @@ void main(){
 					 searchResult = searchKey(root,search);
 
 					 if(searchResult == -1)
-						 printf("Element not present in bst!\n\n");
+						 printf("key not present in bst!\n\n");
 					 else 
 						 printf("key found !!");
 					 break;

@@ -4,73 +4,59 @@ struct node {
 	int data;
 	struct node* next;
 };
+typedef struct node node;
+node* head = NULL;
 
-struct node* head = NULL;
 void insertBeg(){
 
-	int data;
+  node *temp = (node*)malloc(sizeof(node));
 	printf("Enter a number : ");
-	scanf("%d",&data);
-
-	struct node *temp = (struct node*)malloc(sizeof(struct node));
-	temp->data = data;
-	temp->next = NULL;
-
+	scanf("%d",&temp->data);
 	temp->next = head;
 	head = temp;
 
 }
 void insertInBet(){
 
-	int data,pos,found = -1;
+	int pos,found = 0;
+  node *temp = (node*)malloc(sizeof(node));
+
 	printf("Enter a number to insert : ");
-	scanf("%d",&data);
+	scanf("%d",&temp->data);
 	printf("After what element you want to insert : ");
 	scanf("%d",&pos);
-	struct node *temp = (struct node* )malloc(sizeof(struct node));
-	temp->data = data;
 	temp->next = NULL;
-	struct node *ptr = head, *check = head;
-	if(ptr == NULL){
-		head = temp;
-	}
-	else{
-		while(check != NULL){
 
-			if(check->data == pos)
-				found = 0;
-			check = check->next;
-		}
+  if(!head) head = temp;
+  else {
+    node *ptr = head;
+    while(ptr->next){
+      if(ptr->data == pos){
+        found = 1;
+        temp->next = ptr->next;
+        ptr->next = temp;
+        break;
+      }ptr = ptr->next;
+    }
 
-		if(found < 0 ){
-			printf("Invalid position\n");
-			free(temp);
-	}
-		else {
-
-		while(ptr->data != pos){
-			ptr = ptr->next;
-		}
-		temp->next = ptr->next;
-		ptr->next = temp;
-	}
-	}
+    if(ptr->data == pos ){ ptr->next = temp; found = 1; }
+  }
+  if(!found)
+    printf("the entered number is not present in the list!\n");
 }
 
-void insertLast(){
+void insertEnd(){
 
-	int data;
-	printf("Enter a number : ");
-	scanf("%d",&data);
-	struct node *ptr = head;
-	struct node *temp = (struct node* )malloc(sizeof(struct node));
-	temp->data = data;
+  node *temp = (node*)malloc(sizeof(node));
+  printf("Enter a number : ");
+	scanf("%d",&temp->data);
 	temp->next = NULL;
 
-	if(head == NULL)
-		head = temp;
-	else{
-		while(ptr->next != NULL){
+	if(!head) head = temp;
+	
+  else{
+    node *ptr = head;
+		while(ptr->next){
 			ptr = ptr->next;
 		}
 		ptr->next = temp;
@@ -79,93 +65,99 @@ void insertLast(){
 
 void deleteBeg(){
 
-	struct node *ptr = head,*temp = head;
-	if(temp == NULL)
-		printf("Underflow!\n");
-	else {
-		temp = temp->next;
-		head = temp;
+	if(!head) printf("Linked list is empty!\n");
+	
+  else {
+    node *ptr = head;
+		head = head->next;
+    printf("deleted number is %d\n",ptr->data);
 		free(ptr);
 	}
 }
 void deleteInBet(){
-	int pos,found = -1;
+	
+  int pos,found = 0;
 	printf("Which element you want do delete : ");
 	scanf("%d",&pos);
+	
+  if(!head) printf("Linked list is empty!\n");
+  else if(head->data == pos) {
+    found = 1;
+    node *ptr = head;
+    head = head->next;
+    printf("deleted number is %d\n",ptr->data);
+    free(ptr);
+  }
+  else {
+    node *ptr = head ,*preptr = head;
+    while(ptr->next){
+      if(ptr->data == pos){
+       found = 1;
+       preptr->next = ptr->next;
+       printf("deleted number is %d\n",ptr->data);
+       free(ptr);
+       break;
+      }
+      preptr = ptr;
+      ptr = ptr->next;
+    }
 
-	struct node *ptr = head,*check = head,*temp;
-
-	if(ptr == NULL)
-		printf("Underflow!\n");
-	else {
-		while(check != NULL){
-			if(check->data == pos){
-				found = 0;
-			}
-			check = check->next;
-		}
-
-		if(found < 0 )
-			printf("%d is not present in the list\n",pos);
-		else {
-
-		while(ptr->data != pos){
-			temp = ptr;
-			ptr = ptr->next;
-		}
-
-		temp->next = ptr->next;
-		free(ptr);
+    if( ptr->data == pos ){ 
+      preptr->next = NULL;
+      printf("deleted number is %d\n",ptr->data); 
+      free(ptr);
+    }
 	}
-	}
-
+  if(!found)
+    printf("entred number is not present in the list!\n");
 }
 
 void deleteLast(){
 
-	struct node *ptr = head,*preptr = head;
-	if(ptr == NULL)
-		printf("Underflow!\n");
+	node *ptr = head,*preptr = head;
+	if(!ptr)
+		printf("Linked list is empty!\n");
 	else {
-		while(ptr->next != NULL){
+		while(ptr->next){
 			preptr = ptr;
 			ptr = ptr->next;
 		}
 		preptr->next = NULL;
+    printf("deleted number is %d\n",ptr->data);
 		free(ptr);
 	}
 }
+
 void search(){
 
-	int search,found = -1,i = 1;
-
+	int search,found = 0,i = 1;
 	printf("Enter a number to search : ");
 	scanf("%d",&search);
 
-	struct node *temp = head;
-	if(temp == NULL)
-		printf("Linked list empty\n");
-	else {
-		while(temp != NULL){
+	node *temp = head;
+	if(!temp) printf("Linked list empty!\n");
+	
+  else {
+		while(temp){
 			if(temp->data == search){
 				printf("Element found at position %d\n",i);
-				found = 0;
+				found = 1;
 			}
 			temp = temp->next;
 			i++;
 		}
 	}
-	if(found < 0)
-		printf("Element not present in list\n");
+	if(!found)
+		printf("Element not present in list!\n");
 }
 void display(){
 	
-	struct node *temp = head;
+	node *temp = head;
 
-	if(temp == NULL)
+	if(!temp)
 		printf("Linked list is empty\n");
 	else{
-	while(temp != NULL){
+	while(temp){
 		printf("%d\t",temp->data);
 		temp = temp->next;
 	}
@@ -187,7 +179,7 @@ void main(){
 				 break;
 			 }
 		case 2: {
-				insertLast();
+				insertEnd();
 				break;
 			}
 		case 3 : {

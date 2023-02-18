@@ -1,20 +1,19 @@
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 
 #define MAX 10
 
 void DFS(int graph[MAX][MAX], int start, int vertexCount) {
 
-    bool visited[vertexCount];
-    for (int i = 0; i < vertexCount; i++) visited[i] = false;
+    int visited[vertexCount];
+    for (int i = 0; i < vertexCount; i++) visited[i] = 0;
     
     int stack[vertexCount];
     int top = -1;
     
     stack[++top] = start;
-    visited[start] = true;
+    visited[start] = 1;
     while (top >= 0) {
        
         int current = stack[top--];
@@ -23,7 +22,7 @@ void DFS(int graph[MAX][MAX], int start, int vertexCount) {
         for (int i = vertexCount-1; i >= 0; i--) {
             if (graph[current][i] && !visited[i]) {
                 stack[++top] = i;
-                visited[i] = true;
+                visited[i] = 1;
             }
         }
     }
